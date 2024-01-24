@@ -38,10 +38,10 @@ choco install --cacheLocation="$ChocoCachePath" dotnet
 choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 
 #--- Workloads ---
-choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktop
-choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktopbuildtools
-choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-nativedesktop
-choco install --cacheLocation="$ChocoCachePath" -y visualstudio2019-workload-netcoretools
+#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktop
+#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktopbuildtools
+#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-nativedesktop
+#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2019-workload-netcoretools
 
 #--- reenabling critial items ---
 #Enable-UAC
