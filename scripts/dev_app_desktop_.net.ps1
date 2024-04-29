@@ -27,7 +27,7 @@ $ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
 New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
 #--- Tools ---
-#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022professional
+choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022professional
 #choco install -y visualstudio2019professional
 Update-SessionEnvironment #refreshing env due to Git install
 
