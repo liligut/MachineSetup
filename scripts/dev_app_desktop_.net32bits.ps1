@@ -50,3 +50,6 @@ choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 
 #--- Tortoise git
 choco install tortoisegit -y
+
+#--- Git
+choco install --force git -y
