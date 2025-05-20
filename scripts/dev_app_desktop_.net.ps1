@@ -47,3 +47,6 @@ choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 #Enable-UAC
 #Enable-MicrosoftUpdate
 #Get-WindowsUpdate -acceptEula
+
+#--- Tortoise git
+choco install tortoisegit -y
