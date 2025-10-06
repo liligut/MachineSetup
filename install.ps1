@@ -29,8 +29,8 @@ Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell" -N
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell" -Name "ExecutionPolicy" -Value "Unrestricted"
 
 ##Windows Updates
-Install-Module PSWindowsUpdate -Force
-Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
+#Install-Module PSWindowsUpdate -Force
+#Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
 
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
