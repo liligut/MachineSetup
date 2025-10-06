@@ -74,7 +74,7 @@ try {
     New-ItemProperty -Path $regPath -Name "LocalAccountTokenFilterPolicy" -Value 1 -PropertyType DWord -Force | Out-Null
     Write-Log "Successfully created/updated 'LocalAccountTokenFilterPolicy' with value 1 in $regPath."
 } catch {
-    $errorMsg = "Failed to set registry value: $($_.Exception.Message)"
+    $errorMsg = "Failed to set registry key LocalAccountTokenFilterPolicy: $($_.Exception.Message)"
     Write-Log "ERROR: $errorMsg"
 }
 
