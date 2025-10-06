@@ -48,6 +48,9 @@ choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 #Enable-MicrosoftUpdate
 #Get-WindowsUpdate -acceptEula
 
+#--- Disabling UAC
+Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Value 0
+
 #--- SQL Server Management Studio
 choco install sql-server-management-studio -y
 
