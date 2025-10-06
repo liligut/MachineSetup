@@ -1,4 +1,14 @@
-Disable-UAC
+# Log file path
+$logFile = "C:\ScriptLog.txt"
+
+# Function to log messages (appends to file)
+function Write-Log {
+    param([string]$Message)
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $fullMessage = "[$timestamp] $Message"
+    Add-Content -Path $logFile -Value $fullMessage
+    Write-Host $fullMessage  # Optional: Still show on console too
+}
 
 # Get the base URI path from the ScriptToCall value
 $bstrappackage = "-bootstrapPackage"
@@ -50,6 +60,23 @@ choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 
 #--- Disabling UAC
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Value 0
+
+#--- Creating registry key LocalAccountTokenFilterPolicy
+# Define the registry path
+$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# Ensure the key exists (create if it doesn't)
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force | Out-Null
+    Write-Log "Created registry key: $regPath"
+}
+# Create the DWORD value if it doesn't exist, or set it to 1
+try {
+    New-ItemProperty -Path $regPath -Name "LocalAccountTokenFilterPolicy" -Value 1 -PropertyType DWord -Force | Out-Null
+    Write-Log "Successfully created/updated 'LocalAccountTokenFilterPolicy' with value 1 in $regPath."
+} catch {
+    $errorMsg = "Failed to set registry value: $($_.Exception.Message)"
+    Write-Log "ERROR: $errorMsg"
+}
 
 #--- SQL Server Management Studio
 choco install sql-server-management-studio -y
