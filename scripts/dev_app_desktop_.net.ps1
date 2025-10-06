@@ -58,9 +58,6 @@ choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 #Enable-MicrosoftUpdate
 #Get-WindowsUpdate -acceptEula
 
-#--- Disabling UAC
-Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Value 0
-
 #--- Creating registry key LocalAccountTokenFilterPolicy
 # Define the registry path
 $regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
@@ -73,6 +70,15 @@ if (-not (Test-Path $regPath)) {
 try {
     New-ItemProperty -Path $regPath -Name "LocalAccountTokenFilterPolicy" -Value 1 -PropertyType DWord -Force | Out-Null
     Write-Log "Successfully created/updated 'LocalAccountTokenFilterPolicy' with value 1 in $regPath."
+} catch {
+    $errorMsg = "Failed to set registry key LocalAccountTokenFilterPolicy: $($_.Exception.Message)"
+    Write-Log "ERROR: $errorMsg"
+}
+
+#--- Disabling UAC
+try {
+    Set-ItemProperty -Path $regPath -Name EnableLUA -Value 0
+    Write-Log "Successfully updated EnableLUA with value 0 in $regPath."
 } catch {
     $errorMsg = "Failed to set registry key LocalAccountTokenFilterPolicy: $($_.Exception.Message)"
     Write-Log "ERROR: $errorMsg"
