@@ -48,6 +48,9 @@ choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 #Enable-MicrosoftUpdate
 #Get-WindowsUpdate -acceptEula
 
+#--- SQL Server Management Studio
+choco install sql-server-management-studio -y
+
 #--- Tortoise git
 choco install tortoisegit -y
 
