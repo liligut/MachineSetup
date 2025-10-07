@@ -15,4 +15,16 @@ function Write-Log {
 $ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
 New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
-choco install --cacheLocation="$ChocoCachePath" pswindowsupdate -y
+#choco install --cacheLocation="$ChocoCachePath" pswindowsupdate -y
+
+Import-Module PSWindowsUpdate
+Write-Output "Scanning for updates..."
+$updates = Get-WindowsUpdate -AcceptEula
+
+if ($updates.Count -eq 0) { Write-Output "No updates."; exit }
+
+Write-Output "Downloading and installing $($updates.Count) updates..."
+Install-WindowsUpdate -AcceptEula -AutoReboot:$true  # Set to $true for auto-reboot
+
+# Optional: Reboot check
+if (Get-WURebootStatus) { Restart-Computer -Force }
