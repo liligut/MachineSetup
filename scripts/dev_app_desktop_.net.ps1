@@ -41,10 +41,15 @@ New-Item -Path $ChocoCachePath -ItemType Directory -Force
 #choco install -y visualstudio2019professional
 
 #--- SDKs ---
-choco install --cacheLocation="$ChocoCachePath" dotnetcore-sdk
-choco install --cacheLocation="$ChocoCachePath" dotnet3.5
-choco install --cacheLocation="$ChocoCachePath" dotnet
-choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
+try {
+    choco install --cacheLocation="$ChocoCachePath" dotnetcore-sdk
+    choco install --cacheLocation="$ChocoCachePath" dotnet3.5
+    choco install --cacheLocation="$ChocoCachePath" dotnet
+    choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
+    Write-Log "Successfully installed dot net."
+} catch {
+    Write-Log "ERROR: Failed to install dot net."
+}
 
 #--- Workloads ---
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktop
@@ -62,8 +67,7 @@ try {
     choco install sql-server-management-studio -y
     Write-Log "Successfully installed SQL Server Management Studio."
 } catch {
-    $errorMsg = "Failed to install SQL Server Management Studio."
-    Write-Log "ERROR: $errorMsg"
+    Write-Log "ERROR: Failed to install SQL Server Management Studio."
 }
 
 #--- Git
@@ -71,8 +75,7 @@ try {
     choco install --force git -y
     Write-Log "Successfully installed git."
 } catch {
-    $errorMsg = "Failed to install git."
-    Write-Log "ERROR: $errorMsg"
+    Write-Log "ERROR: Failed to install git"
 }
 
 #--- Tortoise git
@@ -80,8 +83,7 @@ try {
     choco install tortoisegit -y
     Write-Log "Successfully installed Tortoise git."
 } catch {
-    $errorMsg = "Failed to install Tortoise git."
-    Write-Log "ERROR: $errorMsg"
+    Write-Log "ERROR: Failed to install Tortoise git."
 }
 
 Update-SessionEnvironment #refreshing env due to Git install
