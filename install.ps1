@@ -1,4 +1,15 @@
-Disable-UAC
+# Log file path
+$logFile = "C:\ScriptLog.txt"
+
+# Function to log messages (appends to file)
+function Write-Log {
+    param([string]$Message)
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $fullMessage = "[$timestamp] $Message"
+    Add-Content -Path $logFile -Value $fullMessage
+    Write-Host $fullMessage  # Optional: Still show on console too
+}
+
 $ConfirmPreference = "None" #ensure installing powershell modules don't prompt on needed dependencies
 
 # Get the base URI path from the ScriptToCall value
@@ -27,6 +38,8 @@ if ($key -eq $null)
 }
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell" -Name "EnableScripts" -Value 00000001 -Type DWORD
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell" -Name "ExecutionPolicy" -Value "Unrestricted"
+
+
 
 ##Windows Updates
 Install-Module PSWindowsUpdate -Force
