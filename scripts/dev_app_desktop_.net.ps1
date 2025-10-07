@@ -58,32 +58,6 @@ choco install --cacheLocation="$ChocoCachePath" dotnet-5.0-sdk
 #Enable-MicrosoftUpdate
 #Get-WindowsUpdate -acceptEula
 
-#--- Creating registry key LocalAccountTokenFilterPolicy
-# Define the registry path
-$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
-# Ensure the key exists (create if it doesn't)
-if (-not (Test-Path $regPath)) {
-    New-Item -Path $regPath -Force | Out-Null
-    Write-Log "Created registry key: $regPath"
-}
-# Create the DWORD value if it doesn't exist, or set it to 1
-try {
-    New-ItemProperty -Path $regPath -Name "LocalAccountTokenFilterPolicy" -Value 1 -PropertyType DWord -Force | Out-Null
-    Write-Log "Successfully created/updated 'LocalAccountTokenFilterPolicy' with value 1 in $regPath."
-} catch {
-    $errorMsg = "Failed to set registry key LocalAccountTokenFilterPolicy: $($_.Exception.Message)"
-    Write-Log "ERROR: $errorMsg"
-}
-
-#--- Disabling UAC
-try {
-    Set-ItemProperty -Path $regPath -Name EnableLUA -Value 0
-    Write-Log "Successfully updated EnableLUA with value 0 in $regPath."
-} catch {
-    $errorMsg = "Failed to set registry key EnableLUA: $($_.Exception.Message)"
-    Write-Log "ERROR: $errorMsg"
-}
-
 #--- SQL Server Management Studio
 try {
     choco install sql-server-management-studio -y
@@ -93,8 +67,20 @@ try {
     Write-Log "ERROR: $errorMsg"
 }
 
-#--- Tortoise git
-choco install tortoisegit -y
-
 #--- Git
-choco install --force git -y
+try {
+    choco install --force git -y
+    Write-Log "Successfully installed git."
+} catch {
+    $errorMsg = "Failed to install git."
+    Write-Log "ERROR: $errorMsg"
+}
+
+#--- Tortoise git
+try {
+    choco install tortoisegit -y
+    Write-Log "Successfully installed Tortoise git."
+} catch {
+    $errorMsg = "Failed to install Tortoise git."
+    Write-Log "ERROR: $errorMsg"
+}
