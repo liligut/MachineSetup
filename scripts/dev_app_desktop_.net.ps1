@@ -80,7 +80,7 @@ try {
     Set-ItemProperty -Path $regPath -Name EnableLUA -Value 0
     Write-Log "Successfully updated EnableLUA with value 0 in $regPath."
 } catch {
-    $errorMsg = "Failed to set registry key LocalAccountTokenFilterPolicy: $($_.Exception.Message)"
+    $errorMsg = "Failed to set registry key EnableLUA: $($_.Exception.Message)"
     Write-Log "ERROR: $errorMsg"
 }
 
