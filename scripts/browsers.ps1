@@ -9,5 +9,16 @@ function Write-Log {
     Write-Host $fullMessage  # Optional: Still show on console too
 }
 
-choco install -y googlechrome
-choco install -y filezilla
+try {
+    choco install -y googlechrome
+    Write-Log "Successfully installed googlechrome."
+} catch {
+    Write-Log "ERROR: Failed to install googlechrome."
+}
+
+try {
+    choco install -y filezilla
+    Write-Log "Successfully installed filezilla."
+} catch {
+    Write-Log "ERROR: Failed to install filezilla."
+}
