@@ -85,7 +85,13 @@ try {
 }
 
 #--- SQL Server Management Studio
-choco install sql-server-management-studio -y
+try {
+    choco install sql-server-management-studio -y
+    Write-Log "Successfully installed SQL Server Management Studio."
+} catch {
+    $errorMsg = "Failed to install SQL Server Management Studio."
+    Write-Log "ERROR: $errorMsg"
+}
 
 #--- Tortoise git
 choco install tortoisegit -y
