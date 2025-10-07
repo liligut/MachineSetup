@@ -17,14 +17,26 @@ New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
 #choco install --cacheLocation="$ChocoCachePath" pswindowsupdate -y
 
-Import-Module PSWindowsUpdate
-Write-Output "Scanning for updates..."
-$updates = Get-WindowsUpdate -AcceptEula
+try {
+    Import-Module PSWindowsUpdate
+    Write-Log "Successfully imported module PSWindowsUpdate."
+    $updates = Get-WindowsUpdate -AcceptEula
+    if ($updates.Count -eq 0) { Write-Log  "No updates."}
+    else {
+      Write-Log "Downloading and installing $($updates.Count) updates..."
+      try {
+        Install-WindowsUpdate -AcceptEula -AutoReboot:$true  # Set to $true for auto-reboot
+        # Reboot check
+        if (Get-WURebootStatus) { Restart-Computer -Force }
+      } catch { 
+        Write-Log "ERROR: Failed to download and install windows update."
+      }
+    }
+} catch {
+    Write-Log "ERROR: Failed to import PSWindowsUpdate."
+}
 
-if ($updates.Count -eq 0) { Write-Output "No updates."; exit }
 
-Write-Output "Downloading and installing $($updates.Count) updates..."
-Install-WindowsUpdate -AcceptEula -AutoReboot:$true  # Set to $true for auto-reboot
 
-# Optional: Reboot check
-if (Get-WURebootStatus) { Restart-Computer -Force }
+
+
