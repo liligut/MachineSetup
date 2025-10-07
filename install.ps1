@@ -67,11 +67,7 @@ try {
 }
 
 $ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
-New-Item -Path $ChocoCachePath -ItemType Directory -Force
-
-##Windows Updates
-#Install-Module PSWindowsUpdate -Force
-#Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
+New-Item -Path $ChocoCachePath -ItemType Directory -Force 
 
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
@@ -79,13 +75,6 @@ executeScript "dev_app_desktop_.net.ps1";
 executeScript "browsers.ps1";
 executeScript "WUpdates.ps1";
 
-#choco install -y powershell-core
-
-#RefreshEnv
-
-#Enable-UAC
-#Enable-MicrosoftUpdate
-#Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
 #Add Windows Credential
 executeScript "AddWindowsCredentials.ps1";
 #Turning Windows features on
