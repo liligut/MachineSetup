@@ -66,9 +66,6 @@ try {
     Write-Log "ERROR: $errorMsg"
 }
 
-$ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
-New-Item -Path $ChocoCachePath -ItemType Directory -Force 
-
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
 executeScript "dev_app_desktop_.net.ps1";
