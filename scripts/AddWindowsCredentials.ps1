@@ -9,7 +9,12 @@ function Write-Log {
     Write-Host $fullMessage  # Optional: Still show on console too
 }
 
-Install-Module -Name CredentialManager -Force
-New-StoredCredential -Target "90.0.0.20" -UserName "Administrator" -Password "Administrator" -Persist Enterprise -Type DomainPassword
-New-StoredCredential -Target "10.0.0.20" -UserName "Administrator" -Password "Administrator" -Persist Enterprise -Type DomainPassword
-#New-StoredCredential -Target "90.0.0.20\Public\Trajectories" -UserName "Administrator" -Password "Administrator" -Persist Enterprise
+try {
+    Install-Module -Name CredentialManager -Force
+    New-StoredCredential -Target "90.0.0.20" -UserName "Administrator" -Password "Administrator" -Persist Enterprise -Type DomainPassword
+    New-StoredCredential -Target "10.0.0.20" -UserName "Administrator" -Password "Administrator" -Persist Enterprise -Type DomainPassword
+    Write-Log "Successfully added windows credentials."
+} catch {
+    Write-Log "ERROR: Failed to add windows creadentials."
+}
+
