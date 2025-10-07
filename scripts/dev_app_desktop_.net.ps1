@@ -75,7 +75,7 @@ try {
     choco install --force git -y
     Write-Log "Successfully installed git."
 } catch {
-    Write-Log "ERROR: Failed to install git"
+    Write-Log "ERROR: Failed to install git."
 }
 
 #--- Tortoise git
