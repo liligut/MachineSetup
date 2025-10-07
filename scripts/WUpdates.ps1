@@ -11,9 +11,8 @@ function Write-Log {
     Write-Host $fullMessage  # Optional: Still show on console too
 }
 
-$ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
-New-Item -Path $ChocoCachePath -ItemType Directory -Force
-
+#$ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
+#New-Item -Path $ChocoCachePath -ItemType Directory -Force
 #choco install --cacheLocation="$ChocoCachePath" pswindowsupdate -y
 
 try {
