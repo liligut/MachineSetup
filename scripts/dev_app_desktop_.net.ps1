@@ -31,10 +31,8 @@ function executeScript {
 executeScript "FileExplorerSettings.ps1";
 executeScript "devtools.ps1";
 
-# Workaround choco / boxstarter path too long error
-# https://github.com/chocolatey/boxstarter/issues/241
+
 $ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
-New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
 #--- Tools ---
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022professional
@@ -57,10 +55,6 @@ try {
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-nativedesktop
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2019-workload-netcoretools
 
-#--- reenabling critial items ---
-#Enable-UAC
-#Enable-MicrosoftUpdate
-#Get-WindowsUpdate -acceptEula
 
 #--- SQL Server Management Studio
 try {
@@ -86,4 +80,5 @@ try {
     Write-Log "ERROR: Failed to install Tortoise git."
 }
 
-Update-SessionEnvironment #refreshing env due to Git install
+#Refresh Environment Variables
+Get-ChildItem Env: | ForEach-Object { $_.Value = [Environment]::GetEnvironmentVariable($_.Name) }
