@@ -9,4 +9,9 @@ function Write-Log {
     Write-Host $fullMessage  # Optional: Still show on console too
 }
 
-netsh int tcp set global autotuninglevel=disabled
+try {
+    netsh int tcp set global autotuninglevel=disabled
+    Write-Log "Successfully set autotuninglevel=disabled."
+} catch {
+    Write-Log "ERROR: Failed to set autotuninglevel=disabled."
+}
