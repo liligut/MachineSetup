@@ -33,6 +33,7 @@ executeScript "devtools.ps1";
 
 
 $ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
+New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
 #--- Tools ---
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022professional
