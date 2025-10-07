@@ -1,4 +1,3 @@
-y
 # Workaround choco / boxstarter path too long error
 # https://github.com/chocolatey/boxstarter/issues/241
 $logFile = "C:\ScriptLog.txt"
