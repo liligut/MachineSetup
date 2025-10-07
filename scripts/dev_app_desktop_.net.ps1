@@ -39,7 +39,6 @@ New-Item -Path $ChocoCachePath -ItemType Directory -Force
 #--- Tools ---
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022professional
 #choco install -y visualstudio2019professional
-Update-SessionEnvironment #refreshing env due to Git install
 
 #--- SDKs ---
 choco install --cacheLocation="$ChocoCachePath" dotnetcore-sdk
@@ -84,3 +83,5 @@ try {
     $errorMsg = "Failed to install Tortoise git."
     Write-Log "ERROR: $errorMsg"
 }
+
+Update-SessionEnvironment #refreshing env due to Git install
