@@ -66,9 +66,12 @@ try {
     Write-Log "ERROR: $errorMsg"
 }
 
+$ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
+New-Item -Path $ChocoCachePath -ItemType Directory -Force
+
 ##Windows Updates
-Install-Module PSWindowsUpdate -Force
-Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
+#Install-Module PSWindowsUpdate -Force
+#Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
 
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
@@ -81,8 +84,8 @@ executeScript "WUpdates.ps1";
 #RefreshEnv
 
 #Enable-UAC
-Enable-MicrosoftUpdate
-Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
+#Enable-MicrosoftUpdate
+#Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot 
 #Add Windows Credential
 executeScript "AddWindowsCredentials.ps1";
 #Turning Windows features on
