@@ -87,21 +87,21 @@ try {
 }
 #--- SQL Server Management Studio
 try {
-    choco install sql-server-management-studio -y
+    choco install --cacheLocation="$ChocoCachePath" sql-server-management-studio -y
     Write-Log "Successfully installed SQL Server Management Studio."
 } catch {
     Write-Log "ERROR: Failed to install SQL Server Management Studio."
 }
 #--- Git
 try {
-    choco install --force git -y
+    choco install --cacheLocation="$ChocoCachePath" --force git -y
     Write-Log "Successfully installed git."
 } catch {
     Write-Log "ERROR: Failed to install git."
 }
 #--- Tortoise git
 try {
-    choco install tortoisegit -y
+    choco install --cacheLocation="$ChocoCachePath" tortoisegit -y
     Write-Log "Successfully installed Tortoise git."
 } catch {
     Write-Log "ERROR: Failed to install Tortoise git."
