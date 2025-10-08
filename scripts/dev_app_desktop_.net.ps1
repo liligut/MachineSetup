@@ -49,9 +49,11 @@ try {
 } catch {
     Write-Log "ERROR: Failed to install dot net."
 }
+#--- TimeZone = Eastern Standard Time ---
+try {
+    Set-TimeZone -Id "Eastern Standard Time"
+    Write-Log "Successfully set TimeZone = Eastern Standard Time."
+} catch {
+    Write-Log "ERROR: Failed to set TimeZone = Eastern Standard Time."
+}
 
-#--- Workloads ---
-#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktop
-#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktopbuildtools
-#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-nativedesktop
-#choco install --cacheLocation="$ChocoCachePath" -y visualstudio2019-workload-netcoretools
