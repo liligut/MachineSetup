@@ -16,6 +16,7 @@ function Write-Log {
 #choco install --cacheLocation="$ChocoCachePath" pswindowsupdate -y
 
 try {
+    Install-Module -Name PSWindowsUpdate -Force
     Import-Module PSWindowsUpdate
     Write-Log "Successfully imported module PSWindowsUpdate."
     $updates = Get-WindowsUpdate
