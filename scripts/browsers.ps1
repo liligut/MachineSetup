@@ -10,7 +10,7 @@ function Write-Log {
 }
 
 try {
-    choco install -y googlechrome
+    choco install googlechrome -y --ignore-checksums
     Write-Log "Successfully installed googlechrome."
 } catch {
     Write-Log "ERROR: Failed to install googlechrome."
