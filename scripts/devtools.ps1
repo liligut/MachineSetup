@@ -35,12 +35,12 @@ try {
 } catch {
     Write-Log "ERROR: Failed to install Microsoft .NET Framework."
 }
-#--- Microsoft .NET Framework
+#--- Visual Studio Code
 try {
     choco install --cacheLocation="$ChocoCachePath" -y vscode
-    Write-Log "Successfully installed Microsoft .NET Framework."
+    Write-Log "Successfully installed Visual Studio Code."
 } catch {
-    Write-Log "ERROR: Failed to install Microsoft .NET Framework."
+    Write-Log "ERROR: Failed to install Visual Studio Code."
 }
 #--- Sysinternals
 try {
