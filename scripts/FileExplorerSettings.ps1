@@ -48,6 +48,18 @@ try {
 } catch {
     Write-Log "ERROR: Failed to set taskbar mode where window is open for multi-monitor."
 }
+# Set Recycle Bin delete confirmation dialog enabled
+try {
+    $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+    $RegKey = "ConfirmFileDelete"
+    If (-not (Test-Path $RegPath)) {
+      New-Item -Path $RegPath -Force | Out-Null
+    }
+    Set-ItemProperty -Path $RegPath -Name $RegKey -Value 1 -Force
+    Write-Log "Successfully set Recycle Bin delete confirmation dialog enabled."
+} catch {
+    Write-Log "ERROR: Failed to set Recycle Bin delete confirmation dialog enabled."
+}
 #disable windows defender
 #Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 1
 #Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Name DisableRealtimeMonitoring -Value 1
