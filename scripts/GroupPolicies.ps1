@@ -12,4 +12,12 @@ function Write-Log {
 $ChocoCachePath = "$env:USERPROFILE\AppData\Local\Temp\chocolatey"
 New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
-choco install --cacheLocation="$ChocoCachePath" -y rsat
+#Install Remote Server Administration Tools (RSAT)
+try {
+    choco install --cacheLocation="$ChocoCachePath" -y rsat
+    Write-Log "Successfully installed Remote Server Administration Tools (RSAT)."
+} catch {
+    Write-Log "ERROR: Failed to install Remote Server Administration Tools (RSAT)."
+}
+
+
