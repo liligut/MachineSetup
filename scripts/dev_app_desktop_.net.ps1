@@ -55,31 +55,3 @@ try {
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-manageddesktopbuildtools
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2022-workload-nativedesktop
 #choco install --cacheLocation="$ChocoCachePath" -y visualstudio2019-workload-netcoretools
-
-
-#--- SQL Server Management Studio
-try {
-    choco install sql-server-management-studio -y
-    Write-Log "Successfully installed SQL Server Management Studio."
-} catch {
-    Write-Log "ERROR: Failed to install SQL Server Management Studio."
-}
-
-#--- Git
-try {
-    choco install --force git -y
-    Write-Log "Successfully installed git."
-} catch {
-    Write-Log "ERROR: Failed to install git."
-}
-
-#--- Tortoise git
-try {
-    choco install tortoisegit -y
-    Write-Log "Successfully installed Tortoise git."
-} catch {
-    Write-Log "ERROR: Failed to install Tortoise git."
-}
-
-#Refresh Environment Variables
-Get-ChildItem Env: | ForEach-Object { $_.Value = [Environment]::GetEnvironmentVariable($_.Name) }
