@@ -10,8 +10,23 @@ function Write-Log {
 }
 
 #>NetFramework3.5
-Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3"  
+try {
+    Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3"  
+    Write-Log "Successfully enabled NetFramework3.5."
+} catch {
+    Write-Log "ERROR: Failed to enable NetFramework3.5."
+}
 #Microsoft print to PDF
-Enable-WindowsOptionalFeature -FeatureName "Printing-PrintToPDFServices-Features" -All -Online
+try {
+    Enable-WindowsOptionalFeature -FeatureName "Printing-PrintToPDFServices-Features" -All -Online
+    Write-Log "Successfully enabled Microsoft print to PDF service."
+} catch {
+    Write-Log "ERROR: Failed to enable Microsoft print to PDF service."
+}
 #Telnet Client
-Enable-WindowsOptionalFeature -Online -FeatureName "TelnetClient"
+try {
+    Enable-WindowsOptionalFeature -Online -FeatureName "TelnetClient"
+    Write-Log "Successfully enabled Telnet Client."
+} catch {
+    Write-Log "ERROR: Failed to enable Telnet Client."
+}
