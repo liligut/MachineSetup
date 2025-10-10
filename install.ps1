@@ -80,3 +80,12 @@ executeScript "EnableWindowsFeatures.ps1";
 executeScript "PowerConfig.ps1";
 #Turn off the default RWIN auto tuning behavior(Wago)
 executeScript "AutotuningBehavior.ps1"
+
+#--- Disabling UAC
+try {
+    Set-ItemProperty -Path $regPath -Name EnableLUA -Value 0
+    Write-Log "Successfully updated EnableLUA with value 0 in $regPath."
+} catch {
+    $errorMsg = "Failed to set registry key EnableLUA: $($_.Exception.Message)"
+    Write-Log "ERROR: $errorMsg"
+}
