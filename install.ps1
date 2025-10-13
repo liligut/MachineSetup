@@ -92,7 +92,7 @@ try {
 	# Write updated content back
     Set-Content -Path $exportPath -Value $content
     # Apply the modified security policy
-    secedit /configure /db secedit.sdb /cfg $exportPath /quiet
+    secedit /configure /db secedit.sdb /cfg $exportPath
     # Remove the temp file
     Remove-Item $exportPath -Force
     Write-Log "Successfully set MinimumPasswordLength = 15 and enabled PasswordComplexity."
