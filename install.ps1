@@ -39,9 +39,6 @@ if ($key -eq $null)
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell" -Name "EnableScripts" -Value 00000001 -Type DWORD
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell" -Name "ExecutionPolicy" -Value "Unrestricted"
 
-# Executing Windows Updates
-executeScript "WUpdates.ps1";
-
 #--- Creating registry key LocalAccountTokenFilterPolicy
 # Define the registry path
 $regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
@@ -68,6 +65,9 @@ try {
     $errorMsg = "Failed to set registry key EnableLUA: $($_.Exception.Message)"
     Write-Log "ERROR: $errorMsg"
 }
+
+# Executing Windows Updates
+executeScript "WUpdates.ps1";
 
 # Set Maximum Password Age to 0 days (never expires)
 try {
