@@ -67,7 +67,14 @@ try {
 }
 
 # Set Maximum Password Age to 0 days (never expires)
-net accounts /maxpwage:unlimited
+try {
+    net accounts /maxpwage:unlimited
+    Write-Log "Successfully set Maximum Password Age to 0 days (never expires)."
+} catch {
+    $errorMsg = "Failed to set Maximum Password Age to 0 days (never expires): $($_.Exception.Message)"
+    Write-Log "ERROR: $errorMsg"
+}
+
 
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
