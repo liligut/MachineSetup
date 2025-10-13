@@ -44,10 +44,10 @@ try {
 }
 #--- Sysinternals
 try {
-    choco install --cacheLocation="$ChocoCachePath" -y sysinternals
-    Write-Log "Successfully installed Sysinternals."
+    #choco install --cacheLocation="$ChocoCachePath" -y sysinternals
+    #Write-Log "Successfully installed Sysinternals."
 } catch {
-    Write-Log "ERROR: Failed to install Sysinternals."
+    #Write-Log "ERROR: Failed to install Sysinternals."
 }
 #--- BeyondCompare
 try {
