@@ -101,6 +101,14 @@ try {
     Write-Log "ERROR: $errorMsg"
 }
 
+# Turn Off All Firewall Profiles
+try {
+    Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled False
+    Write-Log "Successfully Turned Off All Firewall Profiles."
+} catch {
+    $errorMsg = "Failed to Turn Off All Firewall Profiles: $($_.Exception.Message)"
+    Write-Log "ERROR: $errorMsg"
+}
 
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
