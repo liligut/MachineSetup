@@ -66,6 +66,9 @@ try {
     Write-Log "ERROR: $errorMsg"
 }
 
+# Set Maximum Password Age to 0 days (never expires)
+net accounts /maxpwage:unlimited
+
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
 executeScript "dev_app_desktop_.net.ps1";
