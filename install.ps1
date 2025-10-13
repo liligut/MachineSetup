@@ -75,6 +75,29 @@ try {
     Write-Log "ERROR: $errorMsg"
 }
 
+# Set MinimumPasswordLength = 15 and Enable PasswordComplexity
+try {
+    $exportPath = "C:\Temp\secpol.cfg"
+    if (!(Test-Path "C:\Temp")) {
+    	New-Item -Path "C:\Temp" -ItemType Directory | Out-Null
+    }
+	# Export current local security policy
+    secedit /export /cfg $exportPath
+	# Modify MinimumPasswordLength and PasswordComplexity
+    $content = $content -replace 'MinimumPasswordLength\s*=\s*\d+', 'MinimumPasswordLength = 15'
+    $content = $content -replace 'PasswordComplexity\s*=\s*\d+', 'PasswordComplexity = 1'
+	# Write updated content back
+    Set-Content -Path $exportPath -Value $content
+    # Apply the modified security policy
+    secedit /configure /db secedit.sdb /cfg $exportPath /quiet
+    # Remove the temp file
+    Remove-Item $exportPath -Force
+    Write-Log "Successfully set MinimumPasswordLength = 15 and enabled PasswordComplexity."
+} catch {
+    $errorMsg = "Failed to set set MinimumPasswordLength = 15 and enabled PasswordComplexity: $($_.Exception.Message)"
+    Write-Log "ERROR: $errorMsg"
+}
+
 
 #--- Setting up Windows ---
 executeScript "FileExplorerSettings.ps1";
