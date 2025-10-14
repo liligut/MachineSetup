@@ -26,7 +26,7 @@ try {
       try {
         Install-WindowsUpdate -AcceptAll -AutoReboot:$true  # Set to $true for auto-reboot
         # Reboot check
-        if (Get-WURebootStatus) { Restart-Computer -Force }
+        #if (Get-WURebootStatus) { Restart-Computer -Force }
       } catch { 
         Write-Log "ERROR: Failed to download and install windows update."
       }
