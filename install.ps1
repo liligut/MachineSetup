@@ -93,11 +93,15 @@ try {
     Set-Content -Path $exportPath -Value $content
     # Apply the modified security policy
     secedit /configure /db secedit.sdb /cfg $exportPath
+	if ($LASTEXITCODE -eq 0) {
+        Write-Log "Successfully set MinimumPasswordLength = 15 and enabled PasswordComplexity."
+    } else {
+          Write-Log "ERROR: Failed to set set MinimumPasswordLength = 15 and enable PasswordComplexity."
+    }
     # Remove the temp file
     Remove-Item $exportPath -Force
-    Write-Log "Successfully set MinimumPasswordLength = 15 and enabled PasswordComplexity."
 } catch {
-    $errorMsg = "Failed to set set MinimumPasswordLength = 15 and enabled PasswordComplexity: $($_.Exception.Message)"
+    $errorMsg = "Failed to set set MinimumPasswordLength = 15 and enable PasswordComplexity: $($_.Exception.Message)"
     Write-Log "ERROR: $errorMsg"
 }
 
