@@ -119,14 +119,29 @@ executeScript "FileExplorerSettings.ps1";
 executeScript "dev_app_desktop_.net.ps1";
 executeScript "browsers.ps1";
 
-#Add Windows Credential
-executeScript "AddWindowsCredentials.ps1";
+
 #Turning Windows features on
 executeScript "EnableWindowsFeatures.ps1";
 #Setting PowerOption = Ultimate Performance
 executeScript "PowerConfig.ps1";
 #Turn off the default RWIN auto tuning behavior(Wago)
 executeScript "AutotuningBehavior.ps1"
+
+# Default Printer
+try {
+    # Disable "Let Windows manage my default printer"
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Windows" -Name "LegacyDefaultPrinterMode" -Value 1
+	# Set "Microsoft Print to PDF" as the default printer
+	$printer = "Microsoft Print to PDF"
+    (Get-WmiObject -Query "SELECT * FROM Win32_Printer WHERE Name='$printer'").SetDefaultPrinter()
+    Write-Log "Successfully disabled Let Windows manage my default printer and set "Microsoft Print to PDF" as the default printer."
+} catch {
+    $errorMsg = "Failed to disable Let Windows manage my default printer and set "Microsoft Print to PDF" as the default printer.: $($_.Exception.Message)"
+    Write-Log "ERROR: $errorMsg"
+}
+
+#Add Windows Credential
+executeScript "AddWindowsCredentials.ps1";
 
 #--- Disabling UAC
 try {
