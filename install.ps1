@@ -134,9 +134,9 @@ try {
 	# Set "Microsoft Print to PDF" as the default printer
 	$printer = "Microsoft Print to PDF"
     (Get-WmiObject -Query "SELECT * FROM Win32_Printer WHERE Name='$printer'").SetDefaultPrinter()
-    Write-Log "Successfully disabled Let Windows manage my default printer and set "Microsoft Print to PDF" as the default printer."
+    Write-Log "Successfully disabled Let Windows manage my default printer and set Microsoft Print to PDF as the default printer."
 } catch {
-    $errorMsg = "Failed to disable Let Windows manage my default printer and set "Microsoft Print to PDF" as the default printer.: $($_.Exception.Message)"
+    $errorMsg = "Failed to disable Let Windows manage my default printer and set Microsoft Print to PDF as the default printer.": $($_.Exception.Message)"
     Write-Log "ERROR: $errorMsg"
 }
 
@@ -147,8 +147,8 @@ try {
 	# Allow Network Level Authentication (recommended for security)
 	Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 1
     (Get-WmiObject -Query "SELECT * FROM Win32_Printer WHERE Name='$printer'").SetDefaultPrinter()
-    Write-Log "Successfully disabled Let Windows manage my default printer and set "Microsoft Print to PDF" as the default printer."
-	# Enable "Allow Remote Assistance connections to this computer"
+    Write-Log "Successfully disabled Let Windows manage my default printer and set Microsoft Print to PDF as the default printer."
+	# Enable Allow Remote Assistance connections to this computer
 	Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Value 1
 	Write-Log "Successfully enabled Remote Desktop Connections."
 } catch {
