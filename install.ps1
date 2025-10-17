@@ -136,7 +136,7 @@ try {
     (Get-WmiObject -Query "SELECT * FROM Win32_Printer WHERE Name='$printer'").SetDefaultPrinter()
     Write-Log "Successfully disabled Let Windows manage my default printer and set Microsoft Print to PDF as the default printer."
 } catch {
-    $errorMsg = "Failed to disable Let Windows manage my default printer and set Microsoft Print to PDF as the default printer.": $($_.Exception.Message)"
+    $errorMsg = "Failed to disable Let Windows manage my default printer and set Microsoft Print to PDF as the default printer.: $($_.Exception.Message)"
     Write-Log "ERROR: $errorMsg"
 }
 
