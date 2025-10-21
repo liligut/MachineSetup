@@ -44,8 +44,14 @@ try {
 }
 #--- Sysinternals
 try {
-    #choco install --cacheLocation="$ChocoCachePath" -y sysinternals
-    #Write-Log "Successfully installed Sysinternals."
+    $InstallPath = "C:\FAaST\Tools\Sysinternals"
+    if (-not (Test-Path -Path $InstallPath)) {
+       New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null
+   }
+   choco install sysinternals --cacheLocation="$ChocoCachePath" --force --confirm
+   Copy-Item -Path "$env:ProgramData\chocolatey\lib\sysinternals\tools\*" -Destination "$InstallPath" -Recurse -Force
+   Write-Log "Successfully installed Sysinternals."
+   Remove-Item -Path "$env:ProgramData\chocolatey\lib\sysinternals" -Recurse -Force
 } catch {
     #Write-Log "ERROR: Failed to install Sysinternals."
 }
