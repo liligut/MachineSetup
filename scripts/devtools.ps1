@@ -42,6 +42,16 @@ try {
 } catch {
     Write-Log "ERROR: Failed to install Visual Studio Code."
 }
+#--- Create a C:\FAaST\Temp folder
+try {
+    $FolderPath = "C:\FAaST\Temp"
+    if (-not (Test-Path -Path $FolderPath)) {
+       New-Item -ItemType Directory -Path $FolderPath -Force | Out-Null
+       Write-Log "Successfully created C:\FAaST\Temp folder."
+   }
+} catch {
+    Write-Log "ERROR: Failed to install BeyondCompare."
+}
 #--- Sysinternals
 try {
     $InstallPath = "C:\FAaST\Tools\Sysinternals"
